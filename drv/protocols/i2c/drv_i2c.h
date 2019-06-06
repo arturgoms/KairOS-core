@@ -141,6 +141,21 @@ inline esp_err_t i2c_dev_write_reg(const i2c_dev_t *dev, uint8_t reg,
         } \
     } while (0)
 
+#define CHECK(x) do { esp_err_t __; if ((__ = x) != ESP_OK) return __; } while (0)
+#define CHECK_ARG(VAL) do { if (!(VAL)) return ESP_ERR_INVALID_ARG; } while (0)
+#define CHECK_LOGE(dev, x, msg, ...) do { \
+        esp_err_t __; \
+        if ((__ = x) != ESP_OK) { \
+            I2C_DEV_GIVE_MUTEX(&dev->i2c_dev); \
+            ESP_LOGE(TAG, msg, ## __VA_ARGS__); \
+            return __; \
+        } \
+    } while (0)
+inline static esp_err_t write_register8(i2c_dev_t *dev, uint8_t addr, uint8_t value)
+{
+    return i2c_dev_write_reg(dev, addr, &value, 1);
+}
+
 #ifdef __cplusplus
 }
 #endif
