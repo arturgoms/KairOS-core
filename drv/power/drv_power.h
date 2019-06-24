@@ -1,9 +1,8 @@
 #ifndef _POWER_H_
 #define _POWER_H_
 
-#include <stdint.h>
-#include <freertos/FreeRTOS.h>
+#include "def/common.h"
 
-esp_err_t power_init(void);
+kairos_err_t power_init(void);
 
 #endif

@@ -3,7 +3,8 @@
 
 #include <stdint.h>
 #include <freertos/FreeRTOS.h>
+#include "def/common.h"
 
-esp_err_t storage_init(void);
+kairos_err_t storage_init(void);
 
 #endif

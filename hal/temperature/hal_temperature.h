@@ -2,7 +2,7 @@
 #define _HAL_TEMPERATURE_H_
 
 #include <stdint.h>
-
+#include "drv/3rd/bmp280/drv_bmp280.h"
 
 void init_temp(int SDA_PIN, int SCL_PIN);
 

@@ -1,10 +1,8 @@
 #ifndef __BMP280_H__
 #define __BMP280_H__
 
-#include <stdint.h>
-#include <stdbool.h>
-#include <esp_err.h>
 #include "drv/protocols/i2c/drv_i2c.h"
+#include "def/common.h"
 
 #ifdef __cplusplus
 extern "C" {

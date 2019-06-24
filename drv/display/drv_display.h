@@ -1,9 +1,8 @@
 #ifndef _DISPLAY_H_
 #define _DISPLAY_H_
 
-#include <stdint.h>
-#include <freertos/FreeRTOS.h>
+#include "def/common.h"
 
-esp_err_t display_init(void);
+kairos_err_t display_init(void);
 
 #endif

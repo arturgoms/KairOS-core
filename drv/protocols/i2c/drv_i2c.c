@@ -24,7 +24,7 @@ static i2c_config_t configs[I2C_NUM_MAX];
         } \
         } while (0)
 
-esp_err_t i2cdev_init()
+kairos_err_t i2cdev_init()
 {
     for (int i = 0; i < I2C_NUM_MAX; i++)
     {
@@ -41,7 +41,7 @@ esp_err_t i2cdev_init()
     return ESP_OK;
 }
 
-esp_err_t i2cdev_done()
+kairos_err_t i2cdev_done()
 {
     for (int i = 0; i < I2C_NUM_MAX; i++)
     {
@@ -56,7 +56,7 @@ esp_err_t i2cdev_done()
     return ESP_OK;
 }
 
-esp_err_t i2c_dev_create_mutex(i2c_dev_t *dev)
+kairos_err_t i2c_dev_create_mutex(i2c_dev_t *dev)
 {
     if (!dev) return ESP_ERR_INVALID_ARG;
 
@@ -72,7 +72,7 @@ esp_err_t i2c_dev_create_mutex(i2c_dev_t *dev)
     return ESP_OK;
 }
 
-esp_err_t i2c_dev_delete_mutex(i2c_dev_t *dev)
+kairos_err_t i2c_dev_delete_mutex(i2c_dev_t *dev)
 {
     if (!dev) return ESP_ERR_INVALID_ARG;
 
@@ -82,7 +82,7 @@ esp_err_t i2c_dev_delete_mutex(i2c_dev_t *dev)
     return ESP_OK;
 }
 
-esp_err_t i2c_dev_take_mutex(i2c_dev_t *dev)
+kairos_err_t i2c_dev_take_mutex(i2c_dev_t *dev)
 {
     if (!dev) return ESP_ERR_INVALID_ARG;
 
@@ -96,7 +96,7 @@ esp_err_t i2c_dev_take_mutex(i2c_dev_t *dev)
     return ESP_OK;
 }
 
-esp_err_t i2c_dev_give_mutex(i2c_dev_t *dev)
+kairos_err_t i2c_dev_give_mutex(i2c_dev_t *dev)
 {
     if (!dev) return ESP_ERR_INVALID_ARG;
 
@@ -119,11 +119,11 @@ inline static bool cfg_equal(const i2c_config_t *a, const i2c_config_t *b)
         && a->master.clk_speed == b->master.clk_speed;
 }
 
-static esp_err_t i2c_setup_port(i2c_port_t port, const i2c_config_t *cfg)
+static kairos_err_t i2c_setup_port(i2c_port_t port, const i2c_config_t *cfg)
 {
     if (!cfg) return ESP_ERR_INVALID_ARG;
 
-    esp_err_t res;
+    kairos_err_t res;
     if (!cfg_equal(cfg, &configs[port]))
     {
         ESP_LOGD(TAG, "Reconfiguring I2C driver on port %d", port);
@@ -142,13 +142,13 @@ static esp_err_t i2c_setup_port(i2c_port_t port, const i2c_config_t *cfg)
     return ESP_OK;
 }
 
-esp_err_t i2c_dev_read(const i2c_dev_t *dev, const void *out_data, size_t out_size, void *in_data, size_t in_size)
+kairos_err_t i2c_dev_read(const i2c_dev_t *dev, const void *out_data, size_t out_size, void *in_data, size_t in_size)
 {
     if (!dev || !in_data || !in_size) return ESP_ERR_INVALID_ARG;
 
     SEMAPHORE_TAKE(dev->port);
 
-    esp_err_t res = i2c_setup_port(dev->port, &dev->cfg);
+    kairos_err_t res = i2c_setup_port(dev->port, &dev->cfg);
     if (res == ESP_OK)
     {
         i2c_cmd_handle_t cmd = i2c_cmd_link_create();
@@ -174,13 +174,13 @@ esp_err_t i2c_dev_read(const i2c_dev_t *dev, const void *out_data, size_t out_si
     return res;
 }
 
-esp_err_t i2c_dev_write(const i2c_dev_t *dev, const void *out_reg, size_t out_reg_size, const void *out_data, size_t out_size)
+kairos_err_t i2c_dev_write(const i2c_dev_t *dev, const void *out_reg, size_t out_reg_size, const void *out_data, size_t out_size)
 {
     if (!dev || !out_data || !out_size) return ESP_ERR_INVALID_ARG;
 
     SEMAPHORE_TAKE(dev->port);
 
-    esp_err_t res = i2c_setup_port(dev->port, &dev->cfg);
+    kairos_err_t res = i2c_setup_port(dev->port, &dev->cfg);
     if (res == ESP_OK)
     {
         i2c_cmd_handle_t cmd = i2c_cmd_link_create();
@@ -190,7 +190,7 @@ esp_err_t i2c_dev_write(const i2c_dev_t *dev, const void *out_reg, size_t out_re
             i2c_master_write(cmd, (void *)out_reg, out_reg_size, true);
         i2c_master_write(cmd, (void *)out_data, out_size, true);
         i2c_master_stop(cmd);
-        esp_err_t res = i2c_master_cmd_begin(dev->port, cmd, CONFIG_I2CDEV_TIMEOUT / portTICK_RATE_MS);
+        kairos_err_t res = i2c_master_cmd_begin(dev->port, cmd, CONFIG_I2CDEV_TIMEOUT / portTICK_RATE_MS);
         if (res != ESP_OK)
             ESP_LOGE(TAG, "Could not write to device [0x%02x at %d]: %d", dev->addr, dev->port, res);
         i2c_cmd_link_delete(cmd);

@@ -3,6 +3,7 @@
 #define _HAL_ACCELEROMETER_H_
 
 #include <stdint.h>
+#include "drv/3rd/adxl345/drv_adxl345.h"
 
 #define A_TO_READ (6)
 

@@ -1,5 +1,4 @@
 #include "hal_temperature.h"
-#include "drv/3rd/bmp280/drv_bmp280.h"
 
 int SDA_GPIO;
 int SCL_GPIO;
@@ -21,7 +20,7 @@ float get_temp(void){
         printf("Could not init I2Cdev library\n");
         vTaskDelay(250 / portTICK_PERIOD_MS);
     }
-    
+
     while (bmp280_init_desc(&dev, BMP280_I2C_ADDRESS_0, 0, SDA_GPIO, SCL_GPIO) != ESP_OK)
     {
         printf("Could not init device descriptor\n");

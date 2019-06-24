@@ -3,6 +3,7 @@ COMPONENT_SRCDIRS := \
 					lib \
 					hal \
 					test \
+					def \
 					drv/3rd/bmp280 \
 					drv/3rd/adxl345 \
 					hal/temperature \

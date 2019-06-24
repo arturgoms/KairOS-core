@@ -91,7 +91,7 @@ static const char *TAG = "adxl345";
 
 #define I2C_FREQ_HZ 1000000
 
-esp_err_t adxl345_init_desc(adxl345_t *dev, uint8_t addr, i2c_port_t port, gpio_num_t sda_gpio, gpio_num_t scl_gpio)
+kairos_err_t adxl345_init_desc(adxl345_t *dev, uint8_t addr, i2c_port_t port, gpio_num_t sda_gpio, gpio_num_t scl_gpio)
 {
     CHECK_ARG(dev);
 
@@ -114,7 +114,7 @@ esp_err_t adxl345_init_desc(adxl345_t *dev, uint8_t addr, i2c_port_t port, gpio_
     return ESP_OK;
 }
 
-esp_err_t adxl345_init(adxl345_t *dev)
+kairos_err_t adxl345_init(adxl345_t *dev)
 {
 	// Power on
 	CHECK_LOGE(dev, write_register8(&dev->i2c_dev, ADXL345_POWER_CTL, 0), "Failed Wakeup sensor");
@@ -123,7 +123,7 @@ esp_err_t adxl345_init(adxl345_t *dev)
 	return ESP_OK;
 }
 
-esp_err_t adxl345_readXYZ(adxl345_t *dev, double *xyz){
+kairos_err_t adxl345_readXYZ(adxl345_t *dev, double *xyz){
 	int i;
 	int xyz_int[3];
 	gains[0] = 0.00376390;

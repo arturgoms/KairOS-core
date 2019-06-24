@@ -29,7 +29,7 @@ static const char *TAG = "BMP280";
 #define BMP280_RESET_VALUE     0xB6
 
 
-static esp_err_t read_register16(i2c_dev_t *dev, uint8_t reg, uint16_t *r)
+static kairos_err_t read_register16(i2c_dev_t *dev, uint8_t reg, uint16_t *r)
 {
     uint8_t d[] = { 0, 0 };
 
@@ -40,7 +40,7 @@ static esp_err_t read_register16(i2c_dev_t *dev, uint8_t reg, uint16_t *r)
 }
 
 
-static esp_err_t read_calibration_data(bmp280_t *dev)
+static kairos_err_t read_calibration_data(bmp280_t *dev)
 {
     CHECK(read_register16(&dev->i2c_dev, 0x88, &dev->dig_T1));
     CHECK(read_register16(&dev->i2c_dev, 0x8a, (uint16_t *)&dev->dig_T2));
@@ -72,7 +72,7 @@ static esp_err_t read_calibration_data(bmp280_t *dev)
     return ESP_OK;
 }
 
-static esp_err_t read_hum_calibration_data(bmp280_t *dev)
+static kairos_err_t read_hum_calibration_data(bmp280_t *dev)
 {
     uint16_t h4, h5;
 
@@ -96,7 +96,7 @@ static esp_err_t read_hum_calibration_data(bmp280_t *dev)
     return ESP_OK;
 }
 
-esp_err_t bmp280_init_desc(bmp280_t *dev, uint8_t addr, i2c_port_t port, gpio_num_t sda_gpio, gpio_num_t scl_gpio)
+kairos_err_t bmp280_init_desc(bmp280_t *dev, uint8_t addr, i2c_port_t port, gpio_num_t sda_gpio, gpio_num_t scl_gpio)
 {
     CHECK_ARG(dev);
 
@@ -119,14 +119,14 @@ esp_err_t bmp280_init_desc(bmp280_t *dev, uint8_t addr, i2c_port_t port, gpio_nu
     return ESP_OK;
 }
 
-esp_err_t bmp280_free_desc(bmp280_t *dev)
+kairos_err_t bmp280_free_desc(bmp280_t *dev)
 {
     CHECK_ARG(dev);
 
     return i2c_dev_delete_mutex(&dev->i2c_dev);
 }
 
-esp_err_t bmp280_init_default_params(bmp280_params_t *params)
+kairos_err_t bmp280_init_default_params(bmp280_params_t *params)
 {
     CHECK_ARG(params);
 
@@ -140,7 +140,7 @@ esp_err_t bmp280_init_default_params(bmp280_params_t *params)
     return ESP_OK;
 }
 
-esp_err_t bmp280_init(bmp280_t *dev, bmp280_params_t *params)
+kairos_err_t bmp280_init(bmp280_t *dev, bmp280_params_t *params)
 {
     CHECK_ARG(dev);
     CHECK_ARG(params);
@@ -200,7 +200,7 @@ esp_err_t bmp280_init(bmp280_t *dev, bmp280_params_t *params)
     return ESP_OK;
 }
 
-esp_err_t bmp280_force_measurement(bmp280_t *dev)
+kairos_err_t bmp280_force_measurement(bmp280_t *dev)
 {
     CHECK_ARG(dev);
 
@@ -218,7 +218,7 @@ esp_err_t bmp280_force_measurement(bmp280_t *dev)
     return ESP_OK;
 }
 
-esp_err_t bmp280_is_measuring(bmp280_t *dev, bool *busy)
+kairos_err_t bmp280_is_measuring(bmp280_t *dev, bool *busy)
 {
     CHECK_ARG(dev);
     CHECK_ARG(busy);
@@ -303,7 +303,7 @@ static inline uint32_t compensate_humidity(bmp280_t *dev, int32_t adc_hum, int32
     return v_x1_u32r >> 12;
 }
 
-esp_err_t bmp280_read_fixed(bmp280_t *dev, int32_t *temperature, uint32_t *pressure, uint32_t *humidity)
+kairos_err_t bmp280_read_fixed(bmp280_t *dev, int32_t *temperature, uint32_t *pressure, uint32_t *humidity)
 {
     CHECK_ARG(dev);
     CHECK_ARG(temperature);
@@ -348,7 +348,7 @@ esp_err_t bmp280_read_fixed(bmp280_t *dev, int32_t *temperature, uint32_t *press
     return ESP_OK;
 }
 
-esp_err_t bmp280_read_float(bmp280_t *dev, float *temperature, float *pressure, float *humidity)
+kairos_err_t bmp280_read_float(bmp280_t *dev, float *temperature, float *pressure, float *humidity)
 {
     int32_t fixed_temperature;
     uint32_t fixed_pressure;

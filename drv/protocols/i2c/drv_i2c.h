@@ -2,8 +2,7 @@
 #define __I2CDEV_H__
 
 #include <driver/i2c.h>
-#include <freertos/FreeRTOS.h>
-#include <freertos/semphr.h>
+#include "def/common.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -27,42 +26,42 @@ typedef struct
  * functions of this library
  * @return ESP_OK on success
  */
-esp_err_t i2cdev_init();
+kairos_err_t i2cdev_init();
 
 /**
  * @brief Finish work with I2CDev lib
  * Uninstall i2c drivers
  * @return ESP_OK on success
  */
-esp_err_t i2cdev_done();
+kairos_err_t i2cdev_done();
 
 /**
  * @brief Create mutex for device descriptor
  * @param[out] dev Device descriptor
  * @return ESP_OK on success
  */
-esp_err_t i2c_dev_create_mutex(i2c_dev_t *dev);
+kairos_err_t i2c_dev_create_mutex(i2c_dev_t *dev);
 
 /**
  * @brief Delete mutex for device descriptor
  * @param[out] dev Device descriptor
  * @return ESP_OK on success
  */
-esp_err_t i2c_dev_delete_mutex(i2c_dev_t *dev);
+kairos_err_t i2c_dev_delete_mutex(i2c_dev_t *dev);
 
 /**
  * @brief Take device mutex
  * @param[out] dev Device descriptor
  * @return ESP_OK on success
  */
-esp_err_t i2c_dev_take_mutex(i2c_dev_t *dev);
+kairos_err_t i2c_dev_take_mutex(i2c_dev_t *dev);
 
 /**
  * @brief Give device mutex
  * @param[out] dev Device descriptor
  * @return ESP_OK on success
  */
-esp_err_t i2c_dev_give_mutex(i2c_dev_t *dev);
+kairos_err_t i2c_dev_give_mutex(i2c_dev_t *dev);
 
 /**
  * @brief Read from slave device
@@ -76,7 +75,7 @@ esp_err_t i2c_dev_give_mutex(i2c_dev_t *dev);
  * @param[in] in_size Number of byte to read
  * @return ESP_OK on success
  */
-esp_err_t i2c_dev_read(const i2c_dev_t *dev, const void *out_data,
+kairos_err_t i2c_dev_read(const i2c_dev_t *dev, const void *out_data,
         size_t out_size, void *in_data, size_t in_size);
 
 /**
@@ -90,7 +89,7 @@ esp_err_t i2c_dev_read(const i2c_dev_t *dev, const void *out_data,
  * @param[in] out_size Size of data to send
  * @return ESP_OK on success
  */
-esp_err_t i2c_dev_write(const i2c_dev_t *dev, const void *out_reg,
+kairos_err_t i2c_dev_write(const i2c_dev_t *dev, const void *out_reg,
         size_t out_reg_size, const void *out_data, size_t out_size);
 
 /**
@@ -102,7 +101,7 @@ esp_err_t i2c_dev_write(const i2c_dev_t *dev, const void *out_reg,
  * @param[in] in_size Number of byte to read
  * @return ESP_OK on success
  */
-inline esp_err_t i2c_dev_read_reg(const i2c_dev_t *dev, uint8_t reg,
+inline kairos_err_t i2c_dev_read_reg(const i2c_dev_t *dev, uint8_t reg,
         void *in_data, size_t in_size)
 {
     return i2c_dev_read(dev, &reg, 1, in_data, in_size);
@@ -117,41 +116,41 @@ inline esp_err_t i2c_dev_read_reg(const i2c_dev_t *dev, uint8_t reg,
  * @param[in] out_size Size of data to send
  * @return ESP_OK on success
  */
-inline esp_err_t i2c_dev_write_reg(const i2c_dev_t *dev, uint8_t reg,
+inline kairos_err_t i2c_dev_write_reg(const i2c_dev_t *dev, uint8_t reg,
         const void *out_data, size_t out_size)
 {
     return i2c_dev_write(dev, &reg, 1, out_data, out_size);
 }
 
 #define I2C_DEV_TAKE_MUTEX(dev) do { \
-        esp_err_t __ = i2c_dev_take_mutex(dev); \
+        kairos_err_t __ = i2c_dev_take_mutex(dev); \
         if (__ != ESP_OK) return __;\
     } while (0)
 
 #define I2C_DEV_GIVE_MUTEX(dev) do { \
-        esp_err_t __ = i2c_dev_give_mutex(dev); \
+        kairos_err_t __ = i2c_dev_give_mutex(dev); \
         if (__ != ESP_OK) return __;\
     } while (0)
 
 #define I2C_DEV_CHECK(dev,X) do { \
-        esp_err_t ___ = X; \
+        kairos_err_t ___ = X; \
         if (___ != ESP_OK) { \
             I2C_DEV_GIVE_MUTEX(dev); \
             return ___; \
         } \
     } while (0)
 
-#define CHECK(x) do { esp_err_t __; if ((__ = x) != ESP_OK) return __; } while (0)
+#define CHECK(x) do { kairos_err_t __; if ((__ = x) != ESP_OK) return __; } while (0)
 #define CHECK_ARG(VAL) do { if (!(VAL)) return ESP_ERR_INVALID_ARG; } while (0)
 #define CHECK_LOGE(dev, x, msg, ...) do { \
-        esp_err_t __; \
+        kairos_err_t __; \
         if ((__ = x) != ESP_OK) { \
             I2C_DEV_GIVE_MUTEX(&dev->i2c_dev); \
             ESP_LOGE(TAG, msg, ## __VA_ARGS__); \
             return __; \
         } \
     } while (0)
-inline static esp_err_t write_register8(i2c_dev_t *dev, uint8_t addr, uint8_t value)
+inline static kairos_err_t write_register8(i2c_dev_t *dev, uint8_t addr, uint8_t value)
 {
     return i2c_dev_write_reg(dev, addr, &value, 1);
 }

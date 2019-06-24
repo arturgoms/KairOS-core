@@ -17,13 +17,13 @@ void get_accelerometer(int *result){
         printf("Could not init I2Cdev library\n");
         vTaskDelay(250 / portTICK_PERIOD_MS);
     }
-    
+
     while (adxl345_init_desc(&dev, ADXL345_I2C_ADDRESS, 0, SDA_GPIO, SCL_GPIO) != ESP_OK)
     {
         printf("Could not init device descriptor\n");
         vTaskDelay(250 / portTICK_PERIOD_MS);
     }
-	
+
 	while (adxl345_init(&dev) != ESP_OK)
     {
         printf("Could not init accelerometer descriptor\n");
