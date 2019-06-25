@@ -6,6 +6,11 @@
 #include <freertos/semphr.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include "esp_pm.h"
+#include "esp_wifi.h"
+#include "esp_log.h"
+#include "esp_event.h"
+#include "nvs_flash.h"
 
 #define KAIROS_ERR_FAIL 1
 #define KAIROS_ERR_OK 	0

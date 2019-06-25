@@ -2,17 +2,15 @@
 
 int SDA_GPIO;
 int SCL_GPIO;
+bmp280_t dev;
+bool bme280p;
 
 kairos_err_t  init_temp(int SDA_PIN, int SCL_PIN){
     SDA_GPIO = SDA_PIN;
     SCL_GPIO = SCL_PIN;
-    return KAIROS_ERR_OK;
-}
-
-float get_temp(void){
     bmp280_params_t params;
     bmp280_init_default_params(&params);
-    bmp280_t dev;
+    
 
     esp_err_t res;
 
@@ -30,22 +28,55 @@ float get_temp(void){
 
     while ((res = bmp280_init(&dev, &params)) != ESP_OK)
     {
-        printf("Could not init BMP281, err: %d\n", res);
+        printf("Could not init BMP280, err: %d\n", res);
         vTaskDelay(250 / portTICK_PERIOD_MS);
     }
 
-    bool bme280p = dev.id == BME280_CHIP_ID;
+    bme280p = dev.id == BME280_CHIP_ID;
     printf("BMP280: found %s\n", bme280p ? "BME280" : "BMP280");
 
-    float temperature, pressure, humidity;
+    return KAIROS_ERR_OK;
+}
+
+float get_temp(void){
+    float pressure, temperature, humidity;
 
     if (bmp280_read_float(&dev, &temperature, &pressure, &humidity) != ESP_OK)
     {
         printf("Temperature/pressure reading failed\n");
-        return 1;
+        return KAIROS_ERR_FAIL;
     }
-    else
+    
+    return temperature;
+    
+}
+
+float get_humidity(void){
+    float pressure, temperature, humidity;
+
+    if (bmp280_read_float(&dev, &temperature, &pressure, &humidity) != ESP_OK)
     {
-        return temperature;
+        printf("Temperature/pressure reading failed\n");
     }
+
+    if (bmp280_read_float(&dev, &temperature, &pressure, &humidity) != ESP_OK)
+    {
+        printf("Temperature/pressure reading failed\n");
+        return KAIROS_ERR_FAIL;
+    }
+    
+    return humidity;
+}
+
+float get_pressure(void){
+    float pressure, temperature, humidity;
+
+    if (bmp280_read_float(&dev, &temperature, &pressure, &humidity) != ESP_OK)
+    {
+        printf("Temperature/pressure reading failed\n");
+        return KAIROS_ERR_FAIL;
+    }
+    
+    return pressure;
+    
 }

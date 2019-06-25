@@ -7,6 +7,7 @@ kairos_err_t init_peripherals(void){
     passed |= bluetooth_init();
     passed |= display_init();
     passed |= input_init();
+    passed |= cpu_init();
     passed |= power_init();
     passed |= i2cdev_init();
     passed |= storage_init();

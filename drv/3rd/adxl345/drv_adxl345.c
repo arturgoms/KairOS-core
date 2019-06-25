@@ -120,7 +120,7 @@ kairos_err_t adxl345_init(adxl345_t *dev)
 	CHECK_LOGE(dev, write_register8(&dev->i2c_dev, ADXL345_POWER_CTL, 0), "Failed Wakeup sensor");
 	CHECK_LOGE(dev, write_register8(&dev->i2c_dev, ADXL345_POWER_CTL, 16), "Failed Auto-sleep sensor");
 	CHECK_LOGE(dev, write_register8(&dev->i2c_dev, ADXL345_POWER_CTL, 8), "Failed Measure sensor");
-	return ESP_OK;
+	return KAIROS_ERR_OK;
 }
 
 kairos_err_t adxl345_readXYZ(adxl345_t *dev, double *xyz){
@@ -133,7 +133,7 @@ kairos_err_t adxl345_readXYZ(adxl345_t *dev, double *xyz){
 	for(i=0; i<3; i++){
 		xyz[i] = xyz_int[i] * gains[i];
 	}
-	return ESP_OK;
+	return KAIROS_ERR_OK;
 }
 
 

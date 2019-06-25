@@ -37,6 +37,8 @@ kairos_err_t i2cdev_init()
             return ESP_FAIL;
         }
     }
+    i2c_cmd_handle_t m_i2c_cmd = i2c_cmd_link_create();
+    ESP_ERROR_CHECK(i2c_master_start(m_i2c_cmd));
 
     return KAIROS_ERR_OK;
 }

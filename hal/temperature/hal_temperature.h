@@ -7,6 +7,7 @@
 kairos_err_t init_temp(int SDA_PIN, int SCL_PIN);
 
 float get_temp(void);
-
+float get_humidity(void);
+float get_pressure(void);
 
 #endif

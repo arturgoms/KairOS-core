@@ -123,7 +123,7 @@ inline kairos_err_t i2c_dev_write_reg(const i2c_dev_t *dev, uint8_t reg,
 }
 
 #define I2C_DEV_TAKE_MUTEX(dev) do { \
-        kairos_err_t __ = i2c_dev_take_mutex(dev); \
+        esp_err_t __ = i2c_dev_take_mutex(dev); \
         if (__ != ESP_OK) return __;\
     } while (0)
 

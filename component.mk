@@ -16,6 +16,7 @@ COMPONENT_SRCDIRS := \
 					drv/storage \
 					drv/usb	\
 					drv/wifi \
+					drv/cpu \
 					drv/protocols/i2c \
 					hal/temperature \
 					hal/accelerometer \

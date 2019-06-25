@@ -6,6 +6,7 @@
 #include "drv/wifi/drv_wifi.h"
 #include "drv/audio/drv_audio.h"
 #include "drv/battery/drv_battery.h"
+#include "drv/cpu/drv_cpu.h"
 #include "drv/bluetooth/drv_bluetooth.h"
 #include "drv/display/drv_display.h"
 #include "drv/input/drv_input.h"
