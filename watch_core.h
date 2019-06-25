@@ -20,6 +20,5 @@
 #include "res/resource_manager.h"
 #include "res/system_manager.h"
 #include "res/window_manager.h"
-#include "lib/system.h"
 
 #endif
