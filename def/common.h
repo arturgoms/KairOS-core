@@ -15,6 +15,6 @@
 #define KAIROS_ERR_FAIL 1
 #define KAIROS_ERR_OK 	0
 
-#define core_v 0.1.2
+#define core_v 0.2.0
 
 typedef uint8_t kairos_err_t;
