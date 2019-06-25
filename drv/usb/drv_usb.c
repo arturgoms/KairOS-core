@@ -3,5 +3,5 @@
 kairos_err_t usb_init(void)
 {
     printf("USB initiated!\n");
-    return 1;
+    return KAIROS_ERR_OK;
 }

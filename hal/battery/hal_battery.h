@@ -4,6 +4,6 @@
 #include <stdint.h>
 #include <freertos/FreeRTOS.h>
 
-#include "drv/drv_battery.h"
+#include "drv/battery/drv_battery.h"
 
 #endif

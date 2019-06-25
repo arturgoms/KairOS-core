@@ -14,7 +14,8 @@
 #include "drv/storage/drv_storage.h"
 #include "drv/usb/drv_usb.h"
 #include "drv/wifi/drv_wifi.h"
+#include "def/common.h"
 
-watch_err_t init_peripherals(void);
+extern kairos_err_t init_peripherals(void);
 
 #endif // _LIB_PERIPHERALS_H_

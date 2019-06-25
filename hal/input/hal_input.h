@@ -4,6 +4,6 @@
 #include <stdint.h>
 #include <freertos/FreeRTOS.h>
 
-#include "drv/drv_input.h"
+#include "drv/input/drv_input.h"
 
 #endif

@@ -3,5 +3,5 @@
 kairos_err_t storage_init(void)
 {
     printf("Storage initiated!\n");
-    return 1;
+    return KAIROS_ERR_OK;
 }

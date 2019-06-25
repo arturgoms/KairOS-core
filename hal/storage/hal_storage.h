@@ -4,6 +4,6 @@
 #include <stdint.h>
 #include <freertos/FreeRTOS.h>
 
-#include "drv/drv_storage.h"
+#include "drv/storage/drv_storage.h"
 
 #endif

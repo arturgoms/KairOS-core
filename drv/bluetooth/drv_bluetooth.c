@@ -3,5 +3,5 @@
 kairos_err_t bluetooth_init(void)
 {
     printf("Bluetooth initiated!\n");
-    return 1;
+    return KAIROS_ERR_OK;
 }

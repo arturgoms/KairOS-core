@@ -36,7 +36,7 @@ static kairos_err_t read_register16(i2c_dev_t *dev, uint8_t reg, uint16_t *r)
     CHECK(i2c_dev_read_reg(dev, reg, d, 2));
     *r = d[0] | (d[1] << 8);
 
-    return ESP_OK;
+    return KAIROS_ERR_OK;
 }
 
 

@@ -3,9 +3,10 @@
 int SDA_GPIO;
 int SCL_GPIO;
 
-void  init_temp(int SDA_PIN, int SCL_PIN){
+kairos_err_t  init_temp(int SDA_PIN, int SCL_PIN){
     SDA_GPIO = SDA_PIN;
     SCL_GPIO = SCL_PIN;
+    return KAIROS_ERR_OK;
 }
 
 float get_temp(void){

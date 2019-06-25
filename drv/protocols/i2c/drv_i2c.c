@@ -38,7 +38,7 @@ kairos_err_t i2cdev_init()
         }
     }
 
-    return ESP_OK;
+    return KAIROS_ERR_OK;
 }
 
 kairos_err_t i2cdev_done()

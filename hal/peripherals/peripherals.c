@@ -1,15 +1,16 @@
-#include "hal/peripherals.h"
+#include "hal/peripherals/peripherals.h"
 
-watch_err_t init_peripherals(){
-    audio_init();
-    battery_init();
-    bluetooth_init();
-    display_init();
-    input_init();
-    power_init();
-    i2c_init();
-    storage_init();
-    usb_init();
-    wifi_init();
-    return 0;
+kairos_err_t init_peripherals(void){
+    kairos_err_t passed = KAIROS_ERR_FAIL;
+    passed |= audio_init();
+    passed |= battery_init();
+    passed |= bluetooth_init();
+    passed |= display_init();
+    passed |= input_init();
+    passed |= power_init();
+    passed |= i2cdev_init();
+    passed |= storage_init();
+    passed |= usb_init();
+    passed |= wifi_init();
+    return passed;
 }

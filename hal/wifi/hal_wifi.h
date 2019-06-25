@@ -4,6 +4,6 @@
 #include <stdint.h>
 #include <freertos/FreeRTOS.h>
 
-#include "drv/drv_wifi.h"
+#include "drv/wifi/drv_wifi.h"
 
 #endif

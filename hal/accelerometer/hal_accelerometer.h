@@ -7,7 +7,7 @@
 
 #define A_TO_READ (6)
 
-void init_accelerometer(int SDA_PIN, int SCL_PIN);
+kairos_err_t init_accelerometer(int SDA_PIN, int SCL_PIN);
 
 void get_accelerometer(int *result);
 

@@ -4,5 +4,5 @@
 kairos_err_t input_init(void)
 {
     printf("Input initiated!\n");
-    return 1;
+    return KAIROS_ERR_OK;
 }

@@ -111,7 +111,7 @@ kairos_err_t adxl345_init_desc(adxl345_t *dev, uint8_t addr, i2c_port_t port, gp
 
     CHECK(i2c_dev_create_mutex(&dev->i2c_dev));
 
-    return ESP_OK;
+    return KAIROS_ERR_OK;
 }
 
 kairos_err_t adxl345_init(adxl345_t *dev)

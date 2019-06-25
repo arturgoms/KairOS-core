@@ -4,6 +4,6 @@
 #include <stdint.h>
 #include <freertos/FreeRTOS.h>
 
-#include "drv/drv_bluetooth.h"
+#include "drv/bluetooth/drv_bluetooth.h"
 
 #endif

@@ -3,5 +3,5 @@
 kairos_err_t battery_init(void)
 {
     printf("Battery monitor initiated!\n");
-    return 1;
+    return KAIROS_ERR_OK;
 }

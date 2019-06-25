@@ -4,5 +4,5 @@
 kairos_err_t display_init(void)
 {
     printf("Display initiated!\n");
-    return 1;
+    return KAIROS_ERR_OK;
 }

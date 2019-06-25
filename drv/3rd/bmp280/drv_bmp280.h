@@ -112,14 +112,14 @@ typedef struct {
  * @param[in] scl_gpio GPIO pin for SCL
  * @return `ESP_OK` on success
  */
-esp_err_t bmp280_init_desc(bmp280_t *dev, uint8_t addr, i2c_port_t port, gpio_num_t sda_gpio, gpio_num_t scl_gpio);
+kairos_err_t bmp280_init_desc(bmp280_t *dev, uint8_t addr, i2c_port_t port, gpio_num_t sda_gpio, gpio_num_t scl_gpio);
 
 /**
  * @brief Free device descriptor
  * @param dev Pointer to device descriptor
  * @return `ESP_OK` on success
  */
-esp_err_t bmp280_free_desc(bmp280_t *dev);
+kairos_err_t bmp280_free_desc(bmp280_t *dev);
 
 /**
  * Initialize default parameters.
@@ -129,7 +129,7 @@ esp_err_t bmp280_free_desc(bmp280_t *dev);
  *      oversampling: x4
  *      standby time: 250ms
  */
-esp_err_t bmp280_init_default_params(bmp280_params_t *params);
+kairos_err_t bmp280_init_default_params(bmp280_params_t *params);
 
 /**
  * Initialize BMP280 module, probes for the device, soft resets the device,
@@ -142,20 +142,20 @@ esp_err_t bmp280_init_default_params(bmp280_params_t *params);
  *
  * This may be called again to soft reset the device and initialize it again.
  */
-esp_err_t bmp280_init(bmp280_t *dev, bmp280_params_t *params);
+kairos_err_t bmp280_init(bmp280_t *dev, bmp280_params_t *params);
 
 /**
  * Start measurement in forced mode.
  * The module remains in forced mode after this call.
  * Do not call this method in normal mode.
  */
-esp_err_t bmp280_force_measurement(bmp280_t *dev);
+kairos_err_t bmp280_force_measurement(bmp280_t *dev);
 
 /**
  * Check if BMP280 is busy with measuring temperature/pressure.
  * Return true if BMP280 is busy.
  */
-esp_err_t bmp280_is_measuring(bmp280_t *dev, bool *busy);
+kairos_err_t bmp280_is_measuring(bmp280_t *dev, bool *busy);
 
 /**
  * Read compensated temperature and pressure data:
@@ -167,7 +167,7 @@ esp_err_t bmp280_is_measuring(bmp280_t *dev, bool *busy);
  *  Humidity is optional and only read for the BME280, in percent relative
  *  humidity as a fixed point 22 bit interger and 10 bit fraction format.
  */
-esp_err_t bmp280_read_fixed(bmp280_t *dev, int32_t *temperature,
+kairos_err_t bmp280_read_fixed(bmp280_t *dev, int32_t *temperature,
                             uint32_t *pressure, uint32_t *humidity);
 
 /**
@@ -177,7 +177,7 @@ esp_err_t bmp280_read_fixed(bmp280_t *dev, int32_t *temperature,
  *  Humidity is optional and only read for the BME280, in percent relative
  *  humidity.
  */
-esp_err_t bmp280_read_float(bmp280_t *dev, float *temperature,
+kairos_err_t bmp280_read_float(bmp280_t *dev, float *temperature,
                             float *pressure, float *humidity);
 
 #ifdef __cplusplus

@@ -4,6 +4,6 @@
 #include <stdint.h>
 #include <freertos/FreeRTOS.h>
 
-#include "drv/drv_usb.h"
+#include "drv/usb/drv_usb.h"
 
 #endif

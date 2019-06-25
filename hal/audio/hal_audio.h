@@ -4,6 +4,6 @@
 #include <stdint.h>
 #include <freertos/FreeRTOS.h>
 
-#include "drv/drv_audio.h"
+#include "drv/audio/drv_audio.h"
 
 #endif

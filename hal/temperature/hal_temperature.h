@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include "drv/3rd/bmp280/drv_bmp280.h"
 
-void init_temp(int SDA_PIN, int SCL_PIN);
+kairos_err_t init_temp(int SDA_PIN, int SCL_PIN);
 
 float get_temp(void);
 

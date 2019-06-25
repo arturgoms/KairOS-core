@@ -3,7 +3,7 @@
 
 #include "hal/accelerometer/hal_accelerometer.h"
 #include "hal/temperature/hal_temperature.h"
-#include "hal/audio/hal_temperature.h"
+#include "hal/audio/hal_audio.h"
 #include "hal/battery/hal_battery.h"
 #include "hal/bluetooth/hal_bluetooth.h"
 #include "hal/display/hal_display.h"
@@ -14,7 +14,8 @@
 #include "hal/storage/hal_storage.h"
 #include "hal/usb/hal_usb.h"
 #include "hal/wifi/hal_wifi.h"
+#include "def/common.h"
 
-watch_err_t init_modules(void);
+kairos_err_t init_modules(void);
 
 #endif // _LIB_MODULES_H_
